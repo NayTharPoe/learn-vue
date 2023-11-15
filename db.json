@@ -1,0 +1,28 @@
+{
+  "assignments": [
+    {
+      "name": "Design a Vue.js App",
+      "completed": false,
+      "id": 1,
+      "tag": "Design"
+    },
+    {
+      "name": "Build a Vue.js App",
+      "completed": false,
+      "id": 2,
+      "tag": "Build"
+    },
+    {
+      "name":"Deploy a Vue.js App",
+      "completed": false,
+      "id": 3,
+      "tag": "Build"
+    },
+    {
+      "name":"Deploy a React.js App",
+      "completed": true,
+      "id": 3,
+      "tag": "Build"
+    }
+  ]
+}

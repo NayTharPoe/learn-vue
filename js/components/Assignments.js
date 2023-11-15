@@ -14,26 +14,7 @@ export default {
 
   data() {
     return {
-      assignments: [
-        {
-          name: 'Design a Vue.js App',
-          completed: false,
-          id: 1,
-          tag: 'Design',
-        },
-        {
-          name: 'Build a Vue.js App',
-          completed: false,
-          id: 2,
-          tag: 'Build',
-        },
-        {
-          name: 'Deploy a Vue.js App',
-          completed: false,
-          id: 3,
-          tag: 'Build'
-        },
-      ],
+      assignments: [],
 
       newAssignment: '',
     };
@@ -46,6 +27,12 @@ export default {
         completed: this.assignments.filter((assign) => assign.completed),
       };
     },
+  },
+
+  created() {
+    return fetch('http://localhost:3000/assignments').then((response) => {
+      return response.json()
+    }).then((assignments) => this.assignments = assignments)
   },
 
   methods: {

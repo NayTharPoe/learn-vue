@@ -1,13 +1,16 @@
 import Assignment from './Assignment.js';
+import AssignmentTags from './AssignmentTags.js';
 
 export default {
-  components: { Assignment },
+  components: { Assignment, AssignmentTags },
   template: `
   <section v-show="assignments.length">
   <h3>{{ title }}</h3>
-  <div>
-  <button v-for="tag in tags" :class="{active: currentTag === tag}" @click="currentTag = tag">{{tag}}</button>
-  </div>
+    <assignment-tags
+    :initial-tags="assignments.map((a) => a.tag)"
+    @change="currentTag = $event"
+    v-model:currentTag = "currentTag"/
+    />
   <ul>
   <assignment
   v-for="assignment in filteredAssignments"
@@ -22,19 +25,19 @@ export default {
     title: String,
   },
 
-  data(){
+  data() {
     return {
-      currentTag: 'all'
-    }
+      currentTag: 'all',
+    };
   },
 
   computed: {
     filteredAssignments() {
-      if(this.currentTag === 'all'){
+      if (this.currentTag === 'all') {
         return this.assignments;
       }
 
-      return this.assignments.filter(assign => assign.tag === this.currentTag)
+      return this.assignments.filter((assign) => assign.tag === this.currentTag);
     },
     tags() {
       return ['all', ...new Set(this.assignments.map((assign) => assign.tag))];

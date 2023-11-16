@@ -1,19 +1,17 @@
 <script setup>
-import {ref} from 'vue'
-import {useFlash} from '../composables/useFlash'
+import { useStorage } from '@/composables/useStorage'
 
-let pageName = ref('Contact page');
-let {flash} = useFlash();
+let name = useStorage('name', 'good');
 
 </script>
 
 <template lang="">
 
-  <p>{{ pageName }}</p>
-  <button @click="flash('Contact page','Hey from contact page????????', 'info')">Click for alert</button>
+  <label>Name</label>
+  <input type="text" v-model="name" placeholder="name">
 
 </template>
 
 <style lang="">
-  
+
 </style>

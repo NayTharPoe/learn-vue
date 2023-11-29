@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .main-container{
+    margin: 4rem;
+  }
+
+ .preview{
+  width: 150px;
+  height: 150px;
+  background-color: blueviolet;
+ }
+</style>
+<body>
+  <div id="app" v-cloak>
+    <h1>Playground</h1>
+
+    <div class="main-container">
+      <div class="left-blk">
+        <div class="settings-container">
+          <div>
+            <label for="">perspective {{perspective}}px</label>
+          <input type="range" min="0" max="999" v-model="perspective">
+          </div>
+
+          <div>
+            <label for="">rotateX {{rotateX}}deg</label>
+          <input type="range" min="-180deg" max="180" v-model="rotateX">
+          </div>
+
+          <div>
+            <label for="">rotateY {{rotateY}}deg</label>
+          <input type="range" min="-180deg" max="180" v-model="rotateY">
+          </div>
+
+          <div>
+            <label for="">rotateZ {{rotateZ}}deg</label>
+          <input type="range" min="-180deg" max="180" v-model="rotateZ">
+          </div>
+
+          <div>
+            <button @click="reset">Reset</button>
+          <button @click="copy">Copy</button>
+          </div>
+          <br>
+          <br>
+        </div>
+
+      </div>
+      <div class="right-blk">
+        <div class="preview" :style="box"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  let app = {
+    data() {
+      return {
+        perspective: 100,
+        rotateX: 0,
+        rotateY: 0,
+        rotateZ: 0,
+      }
+    },
+
+    computed: {
+        box() {
+          return {
+            transform:
+            `
+              perspective(${this.perspective}px)
+              rotateX(${this.rotateX}deg)
+              rotateY(${this.rotateY}deg)
+              rotateZ(${this.rotateZ}deg)
+            `
+            }
+        }
+    },
+
+    methods: {
+      reset(){
+        this.perspective = 100
+        this.rotateX = 0
+        this.rotateY = 0
+        this.rotateZ = 0
+      },
+
+      copy(){
+        let text= `transform: ${this.box.transform}`;
+        navigator.clipboard.writeText(text)
+      }
+    },
+  }
+
+Vue.createApp(app).mount('#app');
+</script>
+</html>
